@@ -53,7 +53,7 @@ exec('command -v npx', async (error) => {
 
         console.log("Installing node_modules");
 
-        exec(`npm install`, (error) => {
+        exec(`cd ${appName} && npm install`, (error) => {
             if (error) {
                 console.error("Error installing node modules: ", error.message);
                 process.exit(1);
