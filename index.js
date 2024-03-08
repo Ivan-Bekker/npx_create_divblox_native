@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { exec } = require('child_process');
+const { exec, process } = require('child_process');
 const readline = require('node:readline/promises');
 const fs = require('fs');
 
@@ -51,13 +51,20 @@ exec('command -v npx', async (error) => {
         replaceAppParameters("{NAME}", displayName, fileName);
         replaceAppParameters("{BUNDLE_ID}", bundleId, fileName);
 
-        console.log("Installing node_modules");
+        console.log("Installing npm packages...");
 
-        exec(`npm install`, (error) => {
+        process.chdir(appName);
+
+        exec('npm install', (error) => {
             if (error) {
-                console.error("Error installing node modules: ", error.message);
+                console.error("Error installing npm packages: ", error.message);
                 process.exit(1);
             }
+
+            console.log("Npm packages installed successfully.");
+
+            // Close the readline interface
+            readLineInterface.close();
         });
 
         process.exit(0);
