@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { exec, process } = require('child_process');
+const { exec } = require('child_process');
 const readline = require('node:readline/promises');
 const fs = require('fs');
 
