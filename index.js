@@ -3,17 +3,21 @@ const { exec, process } = require('child_process');
 const readline = require('node:readline/promises');
 const fs = require('fs');
 
-execPromise = function(cmd) {
-    return new Promise(function(resolve, reject) {
-        exec(cmd, function(err, stdout) {
-            if (err) return reject(err);
-            resolve(stdout);
+(async () => {
+    const execPromise = function(cmd) {
+        return new Promise(function(resolve, reject) {
+            exec(cmd, function(err, stdout) {
+                if (err) return reject(err);
+                resolve(stdout);
+            });
         });
-    });
-}
+    }
 
-const output = await execPromise('command -v npx');
-console.log(output)
+    const output = await execPromise('command -v npx');
+    console.log(output);
+})()
+
+
 // Check if npx is installed
 exec('command -v npx', async (error) => {
     if (error) {
