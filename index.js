@@ -3,21 +3,6 @@ const { exec, process } = require('child_process');
 const readline = require('node:readline/promises');
 const fs = require('fs');
 
-(async () => {
-    const execPromise = function(cmd) {
-        return new Promise(function(resolve, reject) {
-            exec(cmd, function(err, stdout) {
-                if (err) return reject(err);
-                resolve(stdout);
-            });
-        });
-    }
-
-    const output = await execPromise('command -v npx');
-    console.log(output);
-})()
-
-
 // Check if npx is installed
 exec('command -v npx', async (error) => {
     if (error) {
@@ -26,10 +11,10 @@ exec('command -v npx', async (error) => {
     }
     const readLineInterface = readline.createInterface(process.stdin, process.stdout);
 
-    const appName = await readLineInterface.question("What is your app name ?");
-    const displayName = await readLineInterface.question("What is your app display name ?");
-    const serverUrl = await readLineInterface.question("What is your server url ?");
-    let bundleId = await readLineInterface.question("Wat is your app bundle Id ? Optional");
+    const appName = await readLineInterface.question("What is your app name ? ");
+    const displayName = await readLineInterface.question("What is your app display name ? ");
+    const serverUrl = await readLineInterface.question("What is your server url ? ");
+    let bundleId = await readLineInterface.question("Wat is your app bundle Id ? Optional ");
     readLineInterface.close();
 
     if (bundleId.length < 1) {
